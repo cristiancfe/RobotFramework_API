@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.12.7 on win32)" generated="2024-10-10T17:21:42.179197" rpa="false" schemaversion="5">
+<suite id="s1" name="PUT Robot" source="C:\Users\sandr\Downloads\cristian\QACoders\Academy\PUT Robot_editado\PUT Robot\PUT Robot">
+<suite id="s1-s1" name="Crud" source="C:\Users\sandr\Downloads\cristian\QACoders\Academy\PUT Robot_editado\PUT Robot\PUT Robot\crud.robot">
+<test id="s1-s1-t1" name="Criar usuario" line="24">
+<kw name="Criar usuario">
+<kw name="Cpf" owner="FakerLibrary">
+<msg time="2024-10-10T17:21:44.466430" level="INFO">${cpf} = 746.938.152-09</msg>
+<var>${cpf}</var>
+<status status="PASS" start="2024-10-10T17:21:44.466430" elapsed="0.000000"/>
+</kw>
+<kw name="Remove String" owner="String">
+<msg time="2024-10-10T17:21:44.468423" level="INFO">${cpf} = 74693815209</msg>
+<var>${cpf}</var>
+<arg>${cpf}</arg>
+<arg>.</arg>
+<arg>-</arg>
+<doc>Removes all ``removables`` from the given ``string``.</doc>
+<status status="PASS" start="2024-10-10T17:21:44.467427" elapsed="0.000996"/>
+</kw>
+<kw name="Email" owner="FakerLibrary">
+<msg time="2024-10-10T17:21:44.468423" level="INFO">${mail} = ana-cecilia45@example.com</msg>
+<var>${mail}</var>
+<status status="PASS" start="2024-10-10T17:21:44.468423" elapsed="0.000998"/>
+</kw>
+<kw name="First Name" owner="FakerLibrary">
+<msg time="2024-10-10T17:21:44.471414" level="INFO">${Primeiro_nome} = Fernando</msg>
+<var>${Primeiro_nome}</var>
+<status status="PASS" start="2024-10-10T17:21:44.470417" elapsed="0.000997"/>
+</kw>
+<kw name="Last Name" owner="FakerLibrary">
+<msg time="2024-10-10T17:21:44.472410" level="INFO">${ultimo_nome} = Vargas</msg>
+<var>${ultimo_nome}</var>
+<status status="PASS" start="2024-10-10T17:21:44.472410" elapsed="0.000000"/>
+</kw>
+<kw name="Catenate" owner="BuiltIn">
+<msg time="2024-10-10T17:21:44.473407" level="INFO">${fullName} = Fernando Vargas</msg>
+<var>${fullName}</var>
+<arg>${Primeiro_nome}</arg>
+<arg>${ultimo_nome}</arg>
+<doc>Catenates the given items together and returns the resulted string.</doc>
+<status status="PASS" start="2024-10-10T17:21:44.472410" elapsed="0.000997"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-10T17:21:44.474403" level="INFO">${body} = {'fullName': 'Fernando Vargas', 'mail': 'ana-cecilia45@example.com', 'password': 'Cfe@2024', 'accessProfile': 'ADMIN', 'cpf': '74693815209', 'confirmPassword': 'Cfe@2024'}</msg>
+<var>${body}</var>
+<arg>fullName=${fullName}</arg>
+<arg>mail=${mail}</arg>
+<arg>password=Cfe@2024</arg>
+<arg>accessProfile=ADMIN</arg>
+<arg>cpf=${cpf}</arg>
+<arg>confirmPassword=Cfe@2024</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-10T17:21:44.473407" elapsed="0.000996"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2024-10-10T17:21:44.475400" level="INFO">${headers} = {'Content-Type': 'Application/json', 'Authorization': 'value'}</msg>
+<var>${headers}</var>
+<arg>Content-Type=Application/json</arg>
+<arg>Authorization=${token_admin}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2024-10-10T17:21:44.474403" elapsed="0.000997"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2024-10-10T17:21:44.476397" level="FAIL">Non-existing index or alias 'develop'.</msg>
+<var>${resposta}</var>
+<arg>alias=develop</arg>
+<arg>url=/user/</arg>
+<arg>json=${body}</arg>
+<arg>headers=${headers}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2024-10-10T17:21:44.475400" elapsed="0.022455">Non-existing index or alias 'develop'.</status>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${novo_user}</arg>
+<arg>${resposta.json()['user']['fullName']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.497855" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${user_mail}</arg>
+<arg>${resposta.json()['user']['mail']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.497855" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${user_new_id}</arg>
+<arg>${resposta.json()['user']['_id']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.497855" elapsed="0.000000"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<arg>${id_user}</arg>
+<arg>${resposta.json()['user']['_id']}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.497855" elapsed="0.000999"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>novo usuario</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.498854" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${novo_user}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.498854" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${novo_user}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.498854" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>novo email</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.498854" elapsed="0.000000"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>${user_mail}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.498854" elapsed="0.000000"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<arg>${user_mail}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="NOT RUN" start="2024-10-10T17:21:44.498854" elapsed="0.000996"/>
+</kw>
+<status status="FAIL" start="2024-10-10T17:21:44.465433" elapsed="0.034417">Non-existing index or alias 'develop'.</status>
+</kw>
+<status status="FAIL" start="2024-10-10T17:21:44.464436" elapsed="0.035414">Non-existing index or alias 'develop'.</status>
+</test>
+<doc>Pegar Token</doc>
+<status status="FAIL" start="2024-10-10T17:21:42.276777" elapsed="2.225067"/>
+</suite>
+<status status="FAIL" start="2024-10-10T17:21:42.208572" elapsed="2.294268"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="PUT Robot">PUT Robot</stat>
+<stat pass="0" fail="1" skip="0" id="s1-s1" name="Crud">PUT Robot.Crud</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
